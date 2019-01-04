@@ -77,31 +77,20 @@ $(function() {
 
   // Test suite to check new feed content
   describe('New Feed Selection', function() {
-
-    const feed = document.querySelector('.feed');
-    // Array used to compare feeds
-    const firstFeed = [];
-
+    let firstFeed, secondFeed;
     // Load and compare feeds
     beforeEach(function(done) {
-
       // First feed load
-      loadFeed(0);
-
-      // Store first feed data into the array
-      Array.from(feed.children).forEach(function(entry) {
-        firstFeed.push(entry.innerText);
+      loadFeed(0, function(){
+        firstFeed = document.querySelector('.feed').innerText;
+        // Load the second feed
+        loadFeed(1, done);
       });
-
-      // Load the second feed
-      loadFeed(1, done);
     });
-
     // Compare the first feed data the new feed data
-    it('Feed Content Changes', function() {
-      Array.from(feed.children).forEach(function(entry, i) {
-        expect(entry.innerText === firstFeed[i]).toBe(false);
-      });
+    it('Feed Content Changes', function(){
+      secondFeed = document.querySelector('.feed').innerText;
+      expect(secondFeed).not.toBe(firstFeed);
     });
   });
 }());
