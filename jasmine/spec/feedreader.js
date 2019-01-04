@@ -68,9 +68,10 @@ $(function() {
 
     // Check to see if theres content when the feed load completes
     it('Completes Feed Load', function() {
-      const feed = document.querySelector('.feed');
+      // Entry length variable.
+      let feedEntry = document.querySelectorAll('.feed .entry').length;
       // Length check
-      expect(feed.children.length > 0).toBe(true);
+      expect(feedEntry).toBeGreaterThan(0);
     });
   });
 
